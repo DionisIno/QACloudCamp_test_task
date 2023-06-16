@@ -1,0 +1,1 @@
+# QACloudCamp_test_task
