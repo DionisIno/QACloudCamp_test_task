@@ -24,11 +24,20 @@ class Assertions:
         assert response_json[name] == expected_value, error_message
 
     @staticmethod
+    def assert_response_has_key(response: Response, name):
+        try:
+            response_json = response.json()
+        except json.JSONDecodeError:
+            raise AssertionError(f"""Response is not JSON format. Response text is '{response.text}'""")
+        for item in range(len(response_json)):
+            assert name in response_json[item], f"""{name} not in {response_json[item]}"""
+
+    @staticmethod
     def assert_json_has_key(response: Response, name):
         try:
             response_json = response.json()
         except json.JSONDecodeError:
-            assert False, f"""Response is not JSON format. Response text is '{response.text}'"""
+            raise AssertionError(f"""Response is not JSON format. Response text is '{response.text}'""")
         assert name in response_json, f"""response JSON doesn't have key '{name}'"""
 
     @staticmethod
@@ -36,7 +45,7 @@ class Assertions:
         try:
             response_json = response.json()
         except json.JSONDecodeError:
-            assert False, f"""Response is not JSON format. Response text is '{response.text}'"""
+            raise AssertionError(f"""Response is not JSON format. Response text is '{response.text}'""")
         for name in names:
             assert name in response_json, f"""response JSON doesn't have key '{name}'"""
 
@@ -45,7 +54,7 @@ class Assertions:
         try:
             response_json = response.json()
         except json.JSONDecodeError:
-            assert False, f"""Response is not JSON format. Response text is '{response.text}'"""
+            raise AssertionError(f"""Response is not JSON format. Response text is '{response.text}'""")
         assert name not in response_json, f"""response JSON shouldn't have key '{name}', but it's present"""
 
     @staticmethod
@@ -53,6 +62,6 @@ class Assertions:
         try:
             response_json = response.json()
         except json.JSONDecodeError:
-            assert False, f"""Response is not JSON format. Response text is '{response.text}'"""
+            raise AssertionError(f"""Response is not JSON format. Response text is '{response.text}'""")
         for name in names:
             assert name not in response_json, f"""response JSON shouldn't have key '{name}', but it's present"""
