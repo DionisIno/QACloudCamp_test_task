@@ -35,13 +35,22 @@ class TestGet:
         Assertions.assert_response_has_key(response, "userId")
 
     @allure.title("Response has status key 'title'")
-    def test_response_has_key_user_title(self):
+    def test_response_has_key_title(self):
         """
-        This test check that response has key "userId"
+        This test check that response has key "title"
         """
         url = f"""{GET_POST}"""
         response = MyRequests.get(url)
         Assertions.assert_response_has_key(response, "title")
+
+    @allure.title("Response has status key 'body'")
+    def test_response_has_key_body(self):
+        """
+        This test check that response has key "body"
+        """
+        url = f"""{GET_POST}"""
+        response = MyRequests.get(url)
+        Assertions.assert_response_has_key(response, "body")
 
 
 
