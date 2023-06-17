@@ -67,10 +67,29 @@ class TestGet:
 
     @pytest.mark.parametrize("elem", range(1, 11))
     @allure.title("Each user id has 10 posts")
-    def test_heck_every_user_id_has_10_posts(self, elem):
+    def test_check_every_user_id_has_10_posts(self, elem):
         """
         This test checks that each user id has 10 posts
         """
         url = f"""{GET_POSTS}"""
         response = MyRequests.get(url)
         self.page.check_user_id_has_10_posts(response, elem)
+
+    @allure.title("Each title in the response is not empty")
+    def test_each_title_in_the_response_is_not_empty(self):
+        """
+        This test checks that each title is not empty
+        """
+        url = f"""{GET_POSTS}"""
+        response = MyRequests.get(url)
+        self.page.check_each_title_and_body_in_the_response_is_not_empty(response, "title")
+
+    @allure.title("Each body in the response is not empty")
+    def test_each_body_in_the_response_is_not_empty(self):
+        """
+        This test checks that each body is not empty
+        """
+        url = f"""{GET_POSTS}"""
+        response = MyRequests.get(url)
+        self.page.check_each_title_and_body_in_the_response_is_not_empty(response, "body")
+
