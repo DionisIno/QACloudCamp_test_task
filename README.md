@@ -34,7 +34,10 @@ API url https://jsonplaceholder.typicode.com/
 - Navigate to the root folder of the project.
 - Create a virtual environment.
 - Run command **pip install -r requirements.txt**
-- After, execute **pytest -s -v** to run tests.
+- After, execute **pytest --alluredir=allure_result .\tests** to run tests.
+- To view the allure report, type the command: **allure serve .\allure_result**
+
+
 
 #### Run tests with docker you can use commands:
 -  docker build -t app .

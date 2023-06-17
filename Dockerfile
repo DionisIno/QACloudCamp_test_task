@@ -1,11 +1,10 @@
 FROM python:3.8-alpine
 LABEL authors="Denis"
 
-WORKDIR ./user
-COPY . .
-
+WORKDIR ./app
+VOLUME /allure_result
 RUN apk update && apk upgrade && apk add bash
-
+COPY requirements.txt .
 RUN pip install -r requirements.txt
-
-CMD pytest -s -v tests/*
+COPY . .
+CMD pytest -s -v --alluredir=allure_result tests/*
