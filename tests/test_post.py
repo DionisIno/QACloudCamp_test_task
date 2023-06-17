@@ -41,13 +41,13 @@ class TestPost:
         Assertions.assert_code_status(response, 201)
 
     @pytest.mark.parametrize("item", check.without_title)
-    @allure.title("Creating a post without a date, checking that the answer has no keys body and userId")
+    @allure.title("Creating a post, checking that the answer has no keys body and userId")
     def test_create_post_without_body_and_user_id(self, item):
         """
         This test checks that the creation of a post without a date has no keys body and userId
         """
         url = f"""{GET_POSTS}"""
-        response = MyRequests.post(url)
+        response = MyRequests.post(url, self.data.only_title)
         Assertions.assert_json_has_not_key(response, item)
 
     @allure.title("Create a post with a title and body")
@@ -55,8 +55,18 @@ class TestPost:
         """This test checks to create a post with a title and body"""
         url = f"""{GET_POSTS}"""
         response = MyRequests.post(url, self.data.title_with_body)
+        print(response.json())
         Assertions.assert_json_has_keys(response, self.check.id_title_body)
         Assertions.assert_code_status(response, 201)
+
+    @allure.title("Creating a post, checking that the answer has no key userId")
+    def test_create_post_has_no_user_id(self):
+        """
+        This test checks that the creation of a post has no key userId
+        """
+        url = f"""{GET_POSTS}"""
+        response = MyRequests.post(url, self.data.title_with_body)
+        Assertions.assert_json_has_not_key(response, self.check.user_id)
 
     @pytest.mark.parametrize("elem", Check.all_keys)
     @allure.title("Create a post with a title, userId and body")
@@ -65,4 +75,12 @@ class TestPost:
         url = f"""{GET_POSTS}"""
         response = MyRequests.post(url, self.data.title_user_id_and_body)
         Assertions.assert_json_has_key(response, elem)
+        Assertions.assert_code_status(response, 201)
+
+    @allure.title("Create a post with just a body")
+    def test_create_post_with_body(self):
+        """This test checks to create a post with a body only"""
+        url = f"""{GET_POSTS}"""
+        response = MyRequests.post(url, self.data.only_body)
+        Assertions.assert_json_has_keys(response, self.check.id_body)
         Assertions.assert_code_status(response, 201)
