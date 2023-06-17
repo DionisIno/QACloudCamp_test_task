@@ -40,5 +40,10 @@ API url https://jsonplaceholder.typicode.com/
 
 
 #### Run tests with docker you can use commands:
--  docker build -t app .
-- docker run app 
+- docker build -t app .
+- docker run app
+
+#### To get an allure report from docker, type the following commands:
+- $CONTAINER_ID = (docker ps -a -q | Select-Object -First 1)
+- docker cp ${CONTAINER_ID}:/app/allure_result .
+- To view the allure report, type the command: **allure serve .\allure_result**
