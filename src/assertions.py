@@ -65,3 +65,11 @@ class Assertions:
             raise AssertionError(f"""Response is not JSON format. Response text is '{response.text}'""")
         for name in names:
             assert name not in response_json, f"""response JSON shouldn't have key '{name}', but it's present"""
+
+    @staticmethod
+    def assert_empty_json(response: Response):
+        try:
+            response_json = response.json()
+        except json.JSONDecodeError:
+            raise AssertionError(f"""Response is not JSON format. Response text is '{response.text}'""")
+        assert len(response_json) == 0, "JSON response is not empty"

@@ -15,4 +15,4 @@ class Data:
     only_title = {'title': 'some text'}
     only_body = {"body": "some text"}
     title_with_body = {'title': 'some text', "body": "some text"}
-    title_user_id_and_body = {f'userId': {random.randint(1, 20)}, 'title': 'some text', "body": "some text"}
+    title_user_id_and_body = {f'userId': {random.randint(1, 11)}, 'title': 'some text', "body": "some text"}
