@@ -26,3 +26,12 @@ API url https://jsonplaceholder.typicode.com/
 
 #### Технические требования:
 - добавьте команду запуска в README.
+
+## How to work with this repository:
+
+- Clone repository to your machine.
+
+- Navigate to the root folder of the project.
+- Create a virtual environment.
+- Run command **pip install -r requirements.txt**
+- After, execute **pytest -s -v** to run tests.

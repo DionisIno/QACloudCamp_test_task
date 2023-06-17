@@ -64,6 +64,5 @@ class TestPost:
         """This test checks to create a post with a title, userId and body"""
         url = f"""{GET_POSTS}"""
         response = MyRequests.post(url, self.data.title_user_id_and_body)
-        print(response.json())
         Assertions.assert_json_has_key(response, elem)
         Assertions.assert_code_status(response, 201)
